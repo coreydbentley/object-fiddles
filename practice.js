@@ -96,7 +96,7 @@ Instead, console.log your whole backPack object and then check out the console. 
 
 //Now, loop through your object and alert every value. *Tyler --> 24 --> 6'0 --> Male, etc etc
 
-  for(prop in me){
+  for(var prop in me){
     alert(me[prop]);
   }
 
@@ -116,7 +116,7 @@ Instead, console.log your whole backPack object and then check out the console. 
 
 //Now, loop through your album object alerting every song title individually.
 
-  for(prop in album){
+  for(var prop in album){
     alert(prop);
   }
 
@@ -142,7 +142,7 @@ Instead, console.log your whole backPack object and then check out the console. 
 //Now, loop through your states object and if the states population is greater than 30K, 
 //alert that state.
 
-  for(prop in states){
+  for(var prop in states){
     if( states[prop] > 30000){
       alert(prop);
     }
@@ -167,12 +167,26 @@ var user = {
 /*Above you're given a user object. Loop through the user object checking to make sure
 that each value is truthy. If it's not truthy, remove it from the object. */
 
-  //Code Here
+  for(var prop in user){
+    if(!(user[prop])){
+      delete user[prop];
+    }
+  }
 
-//Once you get your truthy Object, Change the remaining values in the object to be specific to you (name: 'your name', username: 'your username'), rather than my information.
+//Once you get your truthy Object, Change the remaining values in the 
+//object to be specific to you (name: 'your name', username: 'your username'),
+// rather than my information.
 
-  //Code Here
-
+  
+  for(var prop in user){
+    if(!(user[prop])){
+      delete user[prop];
+    }
+    else{
+      var newValue = prompt("Enter your " + prop + ": ");
+      user[prop] = newValue;
+    }
+  }
 
 
 
@@ -195,11 +209,12 @@ var user = {
 //Let's say I, the user, decided to change my name and email address to the following
 // name -> 'Tyler S. McGinnis', email -> 'tyler.mcginnis@devmounta.in'. Make that change.
 
-  //Code Here
+  user.name = 'Tyler S. McGinnis';
+  user.email = 'tyler.mcginnis@devmounta.in';
 
 //Now call the sayName method that's on the user object which will alert the users email
 
-  //Code Here
+  user.sayName();
 
 
 
@@ -211,17 +226,20 @@ var user = {
 
 //Create an empty object called methodCollection.
 
-  //Code Here
+  var methodCollection = {};
+
 
 /*Now add two methods (functions that are properties on objects) to your methodCollection
 object. One called 'alertHello' which alerts 'hello' and another method called logHello
  which logs 'hello' to the console. */
 
-  //Code Here
+  methodCollection.alertHello = function(){ alert('hello') };
+  methodCollection.logHello = function(){ console.log('hello'); }
 
 //Now call your alertHello and logHello methods.
 
-  //Code Here
+ methodCollection.alertHello();
+ methodCollection.logHello();
 
 
 
@@ -229,9 +247,17 @@ object. One called 'alertHello' which alerts 'hello' and another method called l
 
 
 
-// Create a function called MakePerson which takes in name, birthday, ssn as its parameters and returns a new object with all of the information that you passed in.
+// Create a function called MakePerson which takes in name, birthday, 
+//ssn as its parameters and returns a new object with all of the information
+// that you passed in.
 
-  //Code Here
+  function MakePerson(name, birthday, ssn){
+      var newOb = {};
+      newOb.name = name;
+      newOb.birthday = birthday;
+      newOb.ssn = ssn;
+      return newOb;
+  }
 
 
 
@@ -239,9 +265,30 @@ object. One called 'alertHello' which alerts 'hello' and another method called l
 
 
 
-// Create a function called MakeCard which takes in all the data it needs to make a Credit Card object and returns that object so that whenever you invoke MakeCard, you get a brand new credit card.
+// Create a function called MakeCard which takes in all the data it needs to make 
+//a Credit Card object and returns that object so that whenever you invoke MakeCard,
+// you get a brand new credit card.
 
-  //Code Here
+ 
+  function MakeCard(){
+      var newOb = {};
+      var cardNum = '';
+      var cardDigits = '';  
+      var expDate = new Date();
+      var expYear = expDate.getFullYear() + 2;
+      var expMonth = expDate.getUTCMonth() + 1;  
+      var exp = expMonth + "/" + expYear; 
+      for(i=0; i < 4; i++){
+        cardNum = cardNum + Math.floor((Math.random() * 9999) + 1);
+        if(i < 3){
+          cardNum = cardNum + '-';
+        }
+      }
+      newOb.cardNumber = cardNum;
+      newOb.expDate = exp;
+      return newOb;
+  }
+
   
   
   
@@ -249,11 +296,19 @@ object. One called 'alertHello' which alerts 'hello' and another method called l
 
 
 
-/* As of this point you should have a MakePerson and a MakeCard function which returns you either a person or a credit card object.
-   Now, create a bindCard function that takes in a person object as its first parameter and a creditcard object as its second parameter.
-   Have bindCard merge the two parameters together into a new object which contains all the properties from the person as well as the creditcard.
+/* As of this point you should have a MakePerson and a MakeCard function which
+// returns you either a person or a credit card object.
+//Now, create a bindCard function that takes in a person object as its first
+// parameter and a creditcard object as its second parameter.
+//Have bindCard merge the two parameters together into a new object which 
+//contains all the properties from the person as well as the creditcard.
 */
 
-  //Code Here
+  function bindCard(person, creditcard){
+     var creditAcct = {};
+     creditAcct.user = person;
+     creditAcct.card = creditcard;
+     return creditAcct; 
+  }
 
 
